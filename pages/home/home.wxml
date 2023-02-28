@@ -1,0 +1,27 @@
+<view class="container">
+
+    <i-tabs tabs="{{tabs}}" bind:change="handleTabChange">
+        <view slot="extent">
+            <view class="category">
+                <swiper style="height: 150rpx;" display-multiple-items="{{2}}" next-margin="60rpx">
+                    <swiper-item wx:for="{{categoryList}}" wx:key="index" bind:tap="handleCategoryChange" data-id="{{item.id}}">
+                        <view class="category-swiper-item">
+                            <text class="category-name">{{item.name}} </text>
+                        </view>
+                    </swiper-item>
+
+                </swiper>
+
+            </view>
+
+        </view>
+        <view slot="panel">
+            <view wx:for="{{serviceList}}" wx:key="index">
+            
+            <i-service-preview service="{{item}}"></i-service-preview>
+    
+            </view>
+        </view>
+
+    </i-tabs>
+</view>

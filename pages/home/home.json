@@ -1,0 +1,8 @@
+{   "navigationBarBackgroundColor": "#f3d066",
+    "navigationBarTitleText": "服务广场",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "i-tabs":"/components/tabs/tabs",
+        "i-service-preview":"/components/service-preview/service-preview"
+    }
+}
