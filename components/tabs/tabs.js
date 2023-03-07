@@ -1,4 +1,5 @@
 // components/tabs/tabs.js
+import {throttle} from "../../utils/utils";
 Component({
 
     options: {
@@ -11,9 +12,19 @@ Component({
         tabs: {
             type: Array,
             value: []
+        },
+        active:{
+            type:Number,
+            value:0
         }
     },
-
+observers:{
+        active:function(active){
+            this.setData({
+                currentTabIndex:active
+            })
+        }
+},
     /**
      * 组件的初始数据
      */
@@ -25,7 +36,7 @@ Component({
      * 组件的方法列表
      */
     methods: {
-        handleTabChange:function (event){
+        handleTabChange:throttle(function (event){
        
             const index=event.currentTarget.dataset.index
             if(index==this.data.currentTabIndex){
@@ -36,7 +47,7 @@ Component({
             })
 
             this.triggerEvent('change',{index})
-          },
+          }),
 
           handleTouchMove(event){
             console.log(event)

@@ -1,0 +1,65 @@
+<import src="service-detail.skeleton.wxml"/>
+<template is="skeleton" wx:if="{{loading}}" />
+<wxs src="/common/wxs/status-text.wxs" module="statusText"></wxs>
+
+<view class="container">
+    <view class="inner-container">
+        <view class="service-info">
+            <image class="cover-image" mode="widthFix" src="{{service.cover_image.path}}"></image>
+            <view class="row">
+                <view class="title">{{service.title}}</view>
+                <view class="category">
+                    <i-icon name="biaoqian" color="#f27013"></i-icon>
+                    <view class="tag-text">{{service.category.name}}</view>
+                </view>
+            </view>
+            <view class="row">
+                <view class="publisher">
+                    <i-avatar shape="circle" src="{{service.publisher.avatar}}" text="{{service.publisher.nickname}}" size="60">
+                    </i-avatar>
+                </view>
+                <view wx:if="{{service.type === serviceTypeEnum.PROVIDE}}" class="score">★ {{service.score}}</view>
+            </view>
+            <view class="row">
+                <view class="publish-date">{{service.create_time}}</view>
+            </view>
+            <view class="row row-space-between">
+                <view class="price">
+                    <text class="label">￥</text>{{service.price}}
+                </view>
+                <view class="sales-volume" wx:if="{{service.type === 1}}">
+                    已售 {{service.sales_volume}}
+                </view>
+            </view>
+            <view class="row">
+                <view class="description">{{service.description}}</view>
+            </view>
+        </view>
+        <view wx:if="{{isPublisher}}" class="service-status">
+            <view>服务状态</view>
+            <view>{{statusText.convert(service.status)}}</view>
+        </view>
+        <view wx:if="{{service.type === serviceTypeEnum.PROVIDE}}" class="service-rating">
+            <view class="service-rating-title">历史评价</view>
+            <view wx:if="{{ratingList.length}}" class="service-rating-list">
+                <view class="service-rating-item" wx:for="{{ratingList}}" wx:key="index">
+                    <i-service-rating rating="{{item}}"></i-service-rating>
+                </view>
+            </view>
+            <view wx:else>
+                <i-show-status show content="暂时还没有任何服务" top="150"></i-show-status>
+            </view>
+        </view>
+    </view>
+    <view class="action-bar">
+
+<i-publisher-action wx:if="{{isPublisher}}" service="{{service}}" 
+bind:update="handleUpdateStatus" bind:edit="handleEditService"
+></i-publisher-action>
+<i-consumer-action wx:if="{{!isPublisher}}" service="{{service}}"
+bind:chat="handleChat" bind:order="handleOrder"
+></i-consumer-action>
+
+<i-safe-area area="bottom"></i-safe-area>
+</view>
+</view>

@@ -1,0 +1,6 @@
+{
+   
+    "usingComponents": {
+      "i-service-form": "/components/service-form/service-form"
+    }
+}

@@ -1,11 +1,40 @@
-// pages/my/my.js
+import cache from "../../enum/cache";
+import { setTabBarBadge } from "../../utils/wx";
+import Token from "../../model/token";
+import User from "../../model/user";
+import { appointWithMeGrid, myAppointGrid, myProvideGird, mySeekGrid } from "../../config/grid";
+import Order from "../../model/order";
+import roleType from "../../enum/role-type";
+import Service from "../../model/service";
+import serviceType from "../../enum/service-type";
+import { getEventParam } from "../../utils/utils";
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+        userInfo: {
+            nickname: '点击授权登陆',
+            avatar: '../../images/logo.png'
+        },
+          // 宫格配置
+        // 预约我的宫格
+        appointWithMeGrid: appointWithMeGrid,
+        // 我的预约宫格
+        myAppointGrid: myAppointGrid,
+        // 我在提供宫格
+        myProvideGird: myProvideGird,
+        // 正在找宫格
+        mySeekGrid: mySeekGrid,
 
+        appointWithMeStatus: null,
+        myAppointStatus: null,
+        provideServiceStatus: null,
+        seekServiceStatus: null
+      
+        
     },
 
     /**
@@ -25,42 +54,66 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow() {
+    async onShow(){
+        const unreadCount = wx.getStorageSync(cache.UNREAD_COUNT)
+        setTabBarBadge(unreadCount)
+
+        const verifyToken = await Token.verifyToken();
+        if (verifyToken.valid) {
+            const userInfo = User.getUserInfoByLocal();
+            this.setData({
+                userInfo
+            })
+           this._getOrderStatus()
+           this._getServiceStatus()
+        }
 
     },
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide() {
+    async _getOrderStatus() {
+        const appointWithMeStatus = Order.getOrderStatus(roleType.PUBLISHER); // 6
+        const myAppointStatus = Order.getOrderStatus(roleType.CONSUMER); // 3
 
+        this.setData({
+            appointWithMeStatus: await appointWithMeStatus,
+            myAppointStatus: await myAppointStatus
+        })
     },
 
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload() {
-
+    async _getServiceStatus() {
+        const provideServiceStatus = Service.getServiceStatus(serviceType.PROVIDE);
+        const seekServiceStatus = Service.getServiceStatus(serviceType.SEEK);
+        this.setData({
+            provideServiceStatus: await provideServiceStatus,
+            seekServiceStatus: await seekServiceStatus
+        })
     },
 
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh() {
+    handleNavToOrder(event) {
+        const cell = getEventParam(event, 'cell')
+        
+        if (!('status' in cell)) {
+            wx.navigateTo({
+                url: `/pages/refund-list/refund-list?role=${cell.role}`
+            })
+            return
+        }
 
+        wx.navigateTo({
+            url: `/pages/my-order/my-order?role=${cell.role}&status=${cell.status}`
+        })
     },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom() {
-
+    handleNavToMyService(event) {
+        
+        const { type, status } = getEventParam(event, 'cell')
+        wx.navigateTo({
+            url: `/pages/my-service/my-service?type=${type}&status=${status}`
+        })
     },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage() {
-
+    
+    handleToLogin() {
+        wx.navigateTo({
+            url: '/pages/login/login'
+        })
     }
 })

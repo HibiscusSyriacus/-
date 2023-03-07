@@ -1,3 +1,6 @@
 {
-    "usingComponents": {}
+    "navigationBarTitleText": "发布服务",
+    "usingComponents": {
+      "i-service-form": "/components/service-form/service-form"
+    }
 }

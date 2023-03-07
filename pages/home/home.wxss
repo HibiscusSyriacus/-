@@ -1,21 +1,27 @@
+@import "./home.skeleton.wxss";
+
 .container{
     height: 100%;
 }
 
+.category{
+    padding:30rpx 0 30rpx 30rpx;
+    background: #ffffff;
+
+}
 .category-swiper-item{
     border-radius: 20rpx;
-    width: 300rpx;
+    widows: 300rpx;
     height: 150rpx;
-    background-image: linear-gradient(to right,#e68d44,#eb6d59)
+    background-image: linear-gradient(to right,#e68d44,#eb6d59);
 }
-.category{
-    padding: 30rpx 0 30rpx 30rpx;
-
-}
-
 .category-name{
-    position:absolute;
-    top:20rpx;
-    left: 20rpx;
-    color:#fff
+     position: absolute;
+     top:20rpx;
+     left:20rpx;
+     color:#fff;
+
+}
+.service-preview{
+  margin-bottom: 30rpx;
 }

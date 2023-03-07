@@ -1,0 +1,16 @@
+<view class="container" wx:if="{{order.status === orderStatus.UNAPPROVED}}">
+    <view>
+        <i-button size="long" shape="circle" bind:tap="handleUpdateOrderStatus"
+                  data-action="{{orderAction.AGREE}}">同意
+        </i-button>
+    </view>
+
+    <view class="deny-button">
+        <i-button size="long" shape="circle"
+                  bgColor="red"
+                  fontColor="#ffffff"
+                  bind:tap="handleUpdateOrderStatus"
+                  data-action="{{orderAction.DENY}}">拒绝
+        </i-button>
+    </view>
+</view>

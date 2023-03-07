@@ -1,0 +1,18 @@
+<wxs src="/common/wxs/order-status.wxs" module="orderStatus"></wxs>
+<view class="container">
+    <view class="row">
+        <view class="label">订单编号</view>
+        <view class="content">{{order.order_no}}</view>
+    </view>
+    <view class="row">
+        <view class="label">订单创建时间</view>
+        <view class="content">{{order.create_time}}</view>
+    </view>
+    <view class="row">
+        <view class="label">订单状态</view>
+        <view class="content order-status">
+            {{orderStatus.convert(order.status)}}
+        </view>
+    </view>
+
+</view>

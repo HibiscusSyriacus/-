@@ -1,3 +1,7 @@
 {
-    "usingComponents": {}
-}
+    "navigationBarTitleText": "消息列表",
+    "usingComponents": {
+      "i-conversation-preview": "components/conversation-preview/conversation-preview"
+    }
+  }
+  

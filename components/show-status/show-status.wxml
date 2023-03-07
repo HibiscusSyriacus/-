@@ -1,0 +1,8 @@
+<!--components/show-status/show-status.wxml-->
+<view class="container" style="margin-top:{{top}}rpx">
+    {{content}}
+
+    <view class="extend">
+        <slot></slot>
+    </view>
+</view>

@@ -1,8 +1,29 @@
 {
     "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-    "projectname": "intelligentCommunity(1)",
+    "projectname": "intelligentCommunitya",
     "setting": {
-        "compileHotReLoad": true
+        "compileHotReLoad": true,
+        "urlCheck": false
     },
-    "libVersion": "2.30.2"
+    "libVersion": "2.30.1",
+    "condition": {
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "服务详情",
+                    "pathName": "pages/service-detail/service-detail",
+                    "query": "service_id=14",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "登录",
+                    "pathName": "pages/login/login",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                }
+            ]
+        }
+    }
 }

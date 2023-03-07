@@ -1,1 +1,8 @@
-/* pages/message/message.wxss */
+page{
+    background: #ffffff;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+}

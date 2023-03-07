@@ -1,0 +1,12 @@
+/* components/show-status/show-status.wxss */
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #888888;
+}
+
+.extend{
+    margin-top: 30rpx;
+}

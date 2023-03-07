@@ -1,6 +1,7 @@
+
 <view class="container">
     <view class="left">
-        <view class="type-tag">{{service.type===1?'在提供':'正在找'}}</view>
+        <view class="type-tag">{{service.type===serviceTypeEnum.PROVIDE?'在提供':'正在找'}}</view>
         <image class="cover-image"
                mode="aspectFill"
                src="{{service.cover_image.path}}"></image>
@@ -9,19 +10,20 @@
         <view class="row">
             <view class="service-title">{{service.title}}</view>
             <view class="category">
-                <i-icon name="biaoqian"></i-icon>
+                <i-icon name="biaoqian" color="#f27013"></i-icon>
+                
                 <view class="category-text">
                 {{service.category.name}}</view>
             </view>
         </view>
         <view class="row">
             <view class="publisher">
-            <view class="publisher-avatar">
                 <image class="publisher-avatar-image" src="{{service.publisher.avatar}}"></image>
             </view>
+            <view class="publisher-nickname">
+            {{service.publisher.nickname}}
             </view>
-            <view class="publisher-nickname">{{service.publisher.nickname}}</view>
-            <view class="score">⭐{{service.score}}</view>
+            <view wx:if="{{service.type===serviceTypeEnum.PROVIDE}}" class="score">⭐{{service.score}}</view>
         </view>
         <view class="row ">
             <view class="create-time">{{service.create_time}}</view>
@@ -29,7 +31,7 @@
         <view class="row row-last">
             <view class="price">
                 <text class="label">￥</text>{{service.price}}</view>
-            <view class="sales">已售{{service.sales_volume}}</view>
+            <view wx:if="{{service.type===serviceTypeEnum.PROVIDE}}" class="sales">已售{{service.sales_volume}}</view>
         </view>
 
     </view>
